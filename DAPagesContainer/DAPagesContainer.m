@@ -116,6 +116,9 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
+    if (selectedIndex >= self.viewControllers.count) {
+        return;
+    }
     NSAssert(selectedIndex < self.viewControllers.count, @"selectedIndex should belong within the range of the view controllers array");
     UIButton *previosSelectdItem = self.topBar.itemViews[self.selectedIndex];
     UIButton *nextSelectdItem = self.topBar.itemViews[selectedIndex];
@@ -319,8 +322,8 @@
             _pageIndicatorView = [[UIImageView alloc] initWithImage:self.pageIndicatorImage];
         } else {
             _pageIndicatorView = [[DAPageIndicatorView alloc] initWithFrame:CGRectMake(0.,
-                                                                                           44,
-                                                                                           self.pageIndicatorViewSize.width,
+                                                                                       44,
+                                                                                       self.pageIndicatorViewSize.width,
                                                                                        self.pageIndicatorViewSize.height)];
             [(DAPageIndicatorView *)_pageIndicatorView setColor:self.topBarBackgroundColor];
         }
@@ -398,8 +401,8 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-					  ofObject:(id)object
-						change:(NSDictionary *)change
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
                        context:(void *)context
 {
     
