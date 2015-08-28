@@ -43,6 +43,9 @@ CGFloat const DAPagesContainerTopBarItemsOffset = 30.;
 
 - (CGPoint)centerForSelectedItemAtIndex:(NSUInteger)index
 {
+    if (self.itemViews.count <= index) {
+        return CGPointZero;
+    }
     CGPoint center = ((UIView *)self.itemViews[index]).center;
     CGPoint offset = [self contentOffsetForSelectedItemAtIndex:index];
     center.x -= offset.x - (CGRectGetMinX(self.scrollView.frame));
